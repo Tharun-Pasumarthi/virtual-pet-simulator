@@ -1,0 +1,92 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+:root {
+  /* Light theme colors */
+  --bg-light: #ffffff;
+  --text-light: #333333;
+  --primary-light: #4a90e2;
+  --secondary-light: #f5f5f5;
+  --accent-light: #ff6b6b;
+  --border-light: #e0e0e0;
+  --card-bg-light: #ffffff;
+  --button-bg-light: #4a90e2;
+  --button-text-light: #ffffff;
+  --hover-light: #357abd;
+
+  /* Dark theme colors */
+  --bg-dark: #1a1a1a;
+  --text-dark: #ffffff;
+  --primary-dark: #64b5f6;
+  --secondary-dark: #2d2d2d;
+  --accent-dark: #ff7b7b;
+  --border-dark: #404040;
+  --card-bg-dark: #2d2d2d;
+  --button-bg-dark: #64b5f6;
+  --button-text-dark: #ffffff;
+  --hover-dark: #90caf9;
+}
+
+[data-theme="dark"] {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  --primary: var(--primary-dark);
+  --secondary: var(--secondary-dark);
+  --accent: var(--accent-dark);
+  --border: var(--border-dark);
+  --card-bg: var(--card-bg-dark);
+  --button-bg: var(--button-bg-dark);
+  --button-text: var(--button-text-dark);
+  --hover: var(--hover-dark);
+}
+
+[data-theme="light"] {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  --primary: var(--primary-light);
+  --secondary: var(--secondary-light);
+  --accent: var(--accent-light);
+  --border: var(--border-light);
+  --card-bg: var(--card-bg-light);
+  --button-bg: var(--button-bg-light);
+  --button-text: var(--button-text-light);
+  --hover: var(--hover-light);
+}
+
+/* Add smooth transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Style common components */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--hover);
+}

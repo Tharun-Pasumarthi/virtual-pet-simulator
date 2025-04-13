@@ -1,0 +1,171 @@
+/* Pet Animations */
+.pet-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.pet-sprite {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-out;
+}
+
+/* Idle Animation */
+@keyframes idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Eating Animation */
+@keyframes eating {
+  0% { transform: scale(1) rotate(0); }
+  25% { transform: scale(1.1) rotate(-5deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+  75% { transform: scale(1.1) rotate(-5deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+/* Playing Animation */
+@keyframes playing {
+  0% { transform: translateX(0) rotate(0); }
+  25% { transform: translateX(-20px) rotate(-15deg); }
+  50% { transform: translateX(20px) rotate(15deg); }
+  75% { transform: translateX(-20px) rotate(-15deg); }
+  100% { transform: translateX(0) rotate(0); }
+}
+
+/* Sleeping Animation */
+@keyframes sleeping {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(0.95); filter: brightness(0.8); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* Petting Animation */
+@keyframes petting {
+  0% { transform: scale(1) rotate(0); }
+  25% { transform: scale(1.05) rotate(-5deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+  75% { transform: scale(1.05) rotate(-5deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+/* Level Up Animation */
+@keyframes levelUp {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.2); filter: brightness(1.5); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* Happy Animation */
+@keyframes happy {
+  0% { transform: rotate(0) scale(1); }
+  25% { transform: rotate(-10deg) scale(1.1); }
+  50% { transform: rotate(10deg) scale(1.1); }
+  75% { transform: rotate(-10deg) scale(1.1); }
+  100% { transform: rotate(0) scale(1); }
+}
+
+/* Sad Animation */
+@keyframes sad {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(0.95) translateY(10px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* Tired Animation */
+@keyframes tired {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+/* Excited Animation */
+@keyframes excited {
+  0% { transform: translateY(0) rotate(0) scale(1); }
+  25% { transform: translateY(-20px) rotate(-10deg) scale(1.1); }
+  50% { transform: translateY(0) rotate(10deg) scale(1.1); }
+  75% { transform: translateY(-10px) rotate(-10deg) scale(1.1); }
+  100% { transform: translateY(0) rotate(0) scale(1); }
+}
+
+/* Particle Effects */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@keyframes hearts {
+  0% { transform: translateY(0) scale(0); opacity: 0; }
+  50% { transform: translateY(-50px) scale(1); opacity: 1; }
+  100% { transform: translateY(-100px) scale(0); opacity: 0; }
+}
+
+@keyframes stars {
+  0% { transform: translateY(0) rotate(0) scale(0); opacity: 0; }
+  50% { transform: translateY(-50px) rotate(180deg) scale(1); opacity: 1; }
+  100% { transform: translateY(-100px) rotate(360deg) scale(0); opacity: 0; }
+}
+
+@keyframes food {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(0, 50px) scale(0); opacity: 0; }
+}
+
+/* Animation States */
+.pet-sprite.idle { animation: idle 2s ease-in-out infinite; }
+.pet-sprite.eating { animation: eating 1s ease-in-out; }
+.pet-sprite.playing { animation: playing 2s ease-in-out; }
+.pet-sprite.sleeping { animation: sleeping 3s ease-in-out infinite; }
+.pet-sprite.petting { animation: petting 1s ease-in-out; }
+.pet-sprite.level-up { animation: levelUp 1s ease-in-out; }
+.pet-sprite.happy { animation: happy 2s ease-in-out; }
+.pet-sprite.sad { animation: sad 2s ease-in-out; }
+.pet-sprite.tired { animation: tired 2s ease-in-out infinite; }
+.pet-sprite.excited { animation: excited 1s ease-in-out; }
+
+/* Particle Classes */
+.heart-particle {
+  position: absolute;
+  animation: hearts 1s ease-out forwards;
+}
+
+.star-particle {
+  position: absolute;
+  animation: stars 1s ease-out forwards;
+}
+
+.food-particle {
+  position: absolute;
+  animation: food 1s ease-in forwards;
+}
+
+/* Transition Effects */
+.fade-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}

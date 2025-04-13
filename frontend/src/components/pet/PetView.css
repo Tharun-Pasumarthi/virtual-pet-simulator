@@ -1,0 +1,105 @@
+.pet-view {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.pet-not-found {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color);
+  background: var(--card-bg);
+  border-radius: 1rem;
+  margin-top: 2rem;
+}
+
+.pet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pet-header h2 {
+  color: var(--text-color);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.level-badge {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+.pet-container {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pet-actions {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pet-inventory {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.pet-inventory h3 {
+  color: var(--text-color);
+  margin: 0 0 1.5rem 0;
+}
+
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.inventory-item {
+  background: var(--bg-color);
+  color: var(--text-color);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  border: 1px solid var(--border-color);
+}
+
+.inventory-item.equipped {
+  background: var(--primary-color);
+  color: white;
+  border-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .pet-view {
+    padding: 1rem;
+  }
+  
+  .pet-container,
+  .pet-actions,
+  .pet-inventory {
+    padding: 1rem;
+  }
+  
+  .inventory-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
