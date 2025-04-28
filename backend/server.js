@@ -13,9 +13,7 @@ const connectDB = require('./src/config/database');
 const { apiLimiter } = require('./src/utils/rateLimiter');
 const errorHandler = require('./src/middleware/errorHandler');
 const { cacheMiddleware, cache } = require('./src/utils/cache');
-const { updateUserCoins } = require('./src/utils/coinGenerator');
-const Pet = require('./src/models/Pet');
-const User = require('./src/models/User');
+const setupSocketEvents = require('./src/utils/socketEvents');
 
 // Import routes
 const authRoutes = require('./src/routes/auth');
@@ -103,22 +101,8 @@ app.all('*', (req, res, next) => {
 // Global Error Handler
 app.use(errorHandler);
 
-// Socket.IO connection handling
-io.on('connection', (socket) => {
-  console.log('User connected:', socket.id);
-
-  socket.on('updateCoins', async ({ userId }) => {
-    const coinsAdded = await updateUserCoins(userId);
-    if (coinsAdded) {
-      const user = await User.findById(userId);
-      socket.emit('coinsUpdated', { coins: user.coins });
-    }
-  });
-
-  socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
-  });
-});
+// Setup socket events
+setupSocketEvents(io);
 
 // Graceful shutdown
 const gracefulShutdown = () => {
@@ -149,7 +133,7 @@ process.on('SIGTERM', gracefulShutdown);
 process.on('SIGINT', gracefulShutdown);
 
 // Start server
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 httpServer.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });

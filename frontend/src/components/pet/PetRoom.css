@@ -1,0 +1,198 @@
+.pet-room {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #f0f0f0;
+  overflow: hidden;
+}
+
+.room-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+}
+
+.room-floor {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(to top, #8d6e63, #a1887f);
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.room-walls {
+  position: absolute;
+  width: 100%;
+  height: 80%;
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+}
+
+.room-furniture {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.bed {
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  width: 150px;
+  height: 100px;
+  background: #795548;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.food-bowl {
+  position: absolute;
+  bottom: 20%;
+  right: 10%;
+  width: 80px;
+  height: 40px;
+  background: #8d6e63;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.toy-box {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  width: 100px;
+  height: 80px;
+  background: #5d4037;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.pets-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.pet {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.pet.hovered {
+  z-index: 10;
+}
+
+.pet-sprite {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.pet-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.pet:hover .pet-image {
+  transform: scale(1.1);
+}
+
+.pet-info {
+  position: absolute;
+  bottom: -30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px 10px;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pet-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.pet-level {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.pet-stats {
+  position: absolute;
+  bottom: -60px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 80px;
+}
+
+.stat-bar {
+  height: 5px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.stat-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.stat-fill.hunger {
+  background: #ff9800;
+}
+
+.stat-fill.happiness {
+  background: #4caf50;
+}
+
+.stat-fill.energy {
+  background: #2196f3;
+}
+
+/* Pet emotion animations */
+.pet.hungry .pet-image {
+  animation: shake 0.5s infinite;
+}
+
+.pet.tired .pet-image {
+  animation: nod 1s infinite;
+}
+
+.pet.sad .pet-image {
+  animation: droop 1s infinite;
+}
+
+.pet.happy .pet-image {
+  animation: bounce 0.5s infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes nod {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+}
+
+@keyframes droop {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+} 

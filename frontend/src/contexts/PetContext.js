@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from '../config/axios';
 import { useAuth } from './AuthContext';
+import { socket } from '../utils/socket';
 
 const PetContext = createContext();
 
@@ -16,27 +17,51 @@ export const PetProvider = ({ children }) => {
   const { user } = useAuth();
   const [pets, setPets] = useState([]);
   const [activePet, setActivePet] = useState(null);
+  const [coins, setCoins] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (user) {
-      fetchPets();
+      // Connect socket when user is logged in
+      socket.connect();
+
+      // Listen for coin updates
+      socket.on('coinsUpdated', ({ coins }) => {
+        setCoins(coins);
+      });
+
+      // Fetch initial data
+      fetchUserData();
+
+      return () => {
+        socket.off('coinsUpdated');
+        socket.disconnect();
+      };
     } else {
       setPets([]);
       setActivePet(null);
     }
   }, [user]);
 
-  const fetchPets = async () => {
+  const fetchUserData = async () => {
     try {
-      const response = await api.get('/api/pets/my-pets');
-      setPets(response.data.data.pets);
-      if (response.data.data.pets.length > 0 && !activePet) {
-        setActivePet(response.data.data.pets[0]);
+      setLoading(true);
+      // Fetch user's pets and coins
+      const response = await fetch('http://localhost:5001/api/user/data', {
+        credentials: 'include'
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        setPets(data.pets);
+        setCoins(data.coins);
+        if (data.pets.length > 0 && !activePet) {
+          setActivePet(data.pets[0]);
+        }
       }
     } catch (error) {
-      setError(error.response?.data?.message || 'Failed to fetch pets');
+      console.error('Error fetching user data:', error);
     } finally {
       setLoading(false);
     }
@@ -89,13 +114,14 @@ export const PetProvider = ({ children }) => {
   const value = {
     pets,
     activePet,
+    coins,
     loading,
     error,
     setActivePet,
     updatePetStats,
     breedPets,
     buyPet,
-    refreshPets: fetchPets
+    fetchUserData
   };
 
   return (
